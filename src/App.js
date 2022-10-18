@@ -13,7 +13,14 @@ function App() {
   const [nPages, setNPages] = useState(0);
   const [searchBy, setSearchBy] = useState("search");
   useEffect(() => {
-    fetch(`http://hn.algolia.com/api/v1/${searchBy}?tags=${tags}&page=${currentPage}&query=${query}`)
+    fetch(`https://hn.algolia.com/api/v1/${searchBy}?tags=${tags}&page=${currentPage}&query=${query}`,
+      {
+        method: "GET", // POST, PUT, DELETE, etc.
+        headers: {
+          'Access-Control-Allow-Origin': "*",
+          'Access-Control-Allow-Credentials': 'true'
+        }
+      })
       .then(response => response.json())
       .then(res => {
         setData(res.hits);
